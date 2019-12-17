@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         MessagesListAdapter<Message> adapter = new MessagesListAdapter<>("1", null);
         messagesList = findViewById(R.id.messagesList);
+        adapter.addToStart(new Message("Hola", new Author("1", "Jon")), true);
         messagesList.setAdapter(adapter);
     }
 

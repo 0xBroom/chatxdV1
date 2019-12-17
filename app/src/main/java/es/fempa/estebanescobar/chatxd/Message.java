@@ -6,7 +6,7 @@ import com.stfalcon.chatkit.commons.models.IUser;
 import java.util.Date;
 
 public class Message implements IMessage {
-    private static int idNum;
+    private static int idNum = 0;
     private String id;
     private String text;
     private IUser user;
@@ -28,17 +28,17 @@ public class Message implements IMessage {
 
     @Override
     public String getId() {
-        return null;
+        return id;
     }
 
     @Override
     public String getText() {
-        return null;
+        return text;
     }
 
     @Override
     public IUser getUser() {
-        return null;
+        return user;
     }
 
     @Override
