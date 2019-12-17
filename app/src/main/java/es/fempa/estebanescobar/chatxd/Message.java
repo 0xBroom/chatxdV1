@@ -6,19 +6,21 @@ import com.stfalcon.chatkit.commons.models.IUser;
 import java.util.Date;
 
 public class Message implements IMessage {
-
+    private static int idNum;
     private String id;
     private String text;
     private IUser user;
 
     public Message(){
-        id = null;
+        idNum++;
+        id = idNum+"";
         text = "";
         user = null;
     }
 
-    public Message(String id, String text, IUser user){
-        this.id = id;
+    public Message(String text, IUser user){
+        idNum++;
+        id = idNum+"";
         this.text = text;
         this.user = user;
     }
