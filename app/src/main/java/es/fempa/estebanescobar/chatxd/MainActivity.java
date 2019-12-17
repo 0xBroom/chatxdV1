@@ -20,81 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         MessagesListAdapter<Message> adapter = new MessagesListAdapter<>("1", null);
-        messagesList = (MessagesList)findViewById(R.id.messagesList);
-        //messagesList = getlist;
-        //messagesList = ;
+        messagesList = findViewById(R.id.messagesList);
         messagesList.setAdapter(adapter);
     }
 
-    public class Author implements IUser {
 
-        /*...*/
-
-        private String id;
-        private String name;
-        private String avatar;
-
-        public Author(){
-            super();
-            max_userid++;
-            String newid = max_userid+"";
-            id= newid;
-            name = "Default";
-            avatar = null;
-        }
-
-        @Override
-        public String getId() {
-            return id;
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public String getAvatar() {
-            return avatar;
-        }
-    }
-
-    public class Message implements IMessage {
-
-        /*...*/
-
-        private String id;
-        public String text;
-        public Author author;
-        public Date createdAt;
-
-        public Message(){
-            max_messid++;
-            id = max_messid+"";
-            text = "Hola";
-            Author author = new Author();
-            createdAt = new Date();
-        }
-
-
-        @Override
-        public String getId() {
-            return id;
-        }
-
-        @Override
-        public String getText() {
-            return text;
-        }
-
-        @Override
-        public Author getUser() {
-            return author;
-        }
-
-        @Override
-        public Date getCreatedAt() {
-            return createdAt;
-        }
-    }
 }
