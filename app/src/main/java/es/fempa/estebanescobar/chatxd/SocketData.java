@@ -28,7 +28,8 @@ public class SocketData {
         outputStream = null;
     }
 
-    public void OpenAndWaitServer(int p){
+    //Create server
+    public void openSocket(int p){
         this.port = p;
         new Thread(){
             @Override
@@ -51,7 +52,8 @@ public class SocketData {
         };
     }
 
-    public void OpenClient(int p, String address){
+    //Create client connection
+    public void openClient(int p, String address){
         this.ip = address;
         this.port = p;
 
@@ -61,8 +63,10 @@ public class SocketData {
                 super.run();
                 try {
                     socket = new Socket(ip, port);
+                    connected = true;
                 } catch (IOException e) {
                     e.printStackTrace();
+                    connected = false;
                 }
             }
         };
