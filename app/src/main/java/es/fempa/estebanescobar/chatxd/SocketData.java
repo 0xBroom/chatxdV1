@@ -2,6 +2,7 @@ package es.fempa.estebanescobar.chatxd;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.ServerSocket;
@@ -14,7 +15,6 @@ public class SocketData {
     private static SocketData instance = null;
 
     private ServerSocket serverSocket;
-    private Socket clientSocket;
     private DataInputStream inputStream;
     private DataOutputStream outputStream;
     private Socket socket;
@@ -24,7 +24,6 @@ public class SocketData {
 
     private SocketData(){
         serverSocket = null;
-        clientSocket = null;
         inputStream = null;
         outputStream = null;
     }
@@ -46,6 +45,24 @@ public class SocketData {
                     connected = true;
                 }catch(Exception e){
                     connected = false;
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
+    public void OpenClient(int p, String address){
+        this.ip = address;
+        this.port = p;
+
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    socket = new Socket(ip, port);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         };
@@ -99,15 +116,6 @@ public class SocketData {
     public void setServerSocket(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
-
-    public Socket getClientSocket() {
-        return clientSocket;
-    }
-
-    public void setClientSocket(Socket clientSocket) {
-        this.clientSocket = clientSocket;
-    }
-
     public DataInputStream getInputStream() {
         return inputStream;
     }
