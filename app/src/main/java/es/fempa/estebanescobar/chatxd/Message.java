@@ -10,12 +10,14 @@ public class Message implements IMessage {
     private String id;
     private String text;
     private IUser user;
+    private Date date;
 
     public Message(){
         idNum++;
         id = idNum+"";
         text = "";
         user = null;
+        date = new Date(System.currentTimeMillis());
     }
 
     public Message(String text, IUser user){
@@ -23,6 +25,7 @@ public class Message implements IMessage {
         id = idNum+"";
         this.text = text;
         this.user = user;
+        date = new Date(System.currentTimeMillis());
     }
 
 
@@ -43,6 +46,6 @@ public class Message implements IMessage {
 
     @Override
     public Date getCreatedAt() {
-        return null;
+        return date;
     }
 }
