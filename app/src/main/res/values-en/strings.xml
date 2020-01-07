@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">chatxd</string>
+    <string name="ip">Ip</string>
+    <string name="name">Name</string>
+    <string name="port">Port</string>
+    <string name="connect">Connect</string>
+    <string name="server">Server</string>
+    <string name="client">Client</string>
+</resources>

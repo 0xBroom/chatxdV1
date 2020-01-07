@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">chatxd</string>
+    <string name="ip">Ip</string>
+    <string name="name">Nombre</string>
+    <string name="port">Puerto</string>
+    <string name="connect">Conectar</string>
+    <string name="server">Servidor</string>
+    <string name="client">Cliente</string>
 </resources>
