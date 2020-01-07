@@ -8,7 +8,7 @@ import com.stfalcon.chatkit.messages.MessagesList;
 import com.stfalcon.chatkit.messages.MessagesListAdapter;
 
 
-public class MainActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
     public static int max_userid; //Para tener controlado el número de ids creados.
     public static int max_messid;
     MessagesList messagesList;
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat);
         adapter =  new MessagesListAdapter<>("1", null);
         inputView = findViewById(R.id.input);
         messagesList = findViewById(R.id.messagesList);
