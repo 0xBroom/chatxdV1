@@ -29,7 +29,7 @@ public class ConfigActivity extends AppCompatActivity {
     public void connect(View v){
         if(s.isChecked()){
             //Cliente
-            h.openClient(Integer.parseInt(etPort.getText().toString()),etIP.getText().toString());
+            h.openClient(Integer.parseInt(etPort.getText().toString()),etIP.getText().toString());//
         }else{
             //Servidor
             h.openServer(Integer.parseInt(etPort.getText().toString()));

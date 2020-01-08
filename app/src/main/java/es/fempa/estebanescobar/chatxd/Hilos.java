@@ -49,7 +49,7 @@ public class Hilos {
         Thread t = new Thread(){
             @Override
             public void run() {
-                super.run();
+                super.run();//
                 try{
                     Log.e("lul", "entra con ip: "+SocketData.getInstance().getIp());
                     SocketData.getInstance().setServerSocket(new ServerSocket(SocketData.getInstance().getPort())); //Creates server socket
