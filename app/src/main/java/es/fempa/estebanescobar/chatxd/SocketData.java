@@ -1,5 +1,7 @@
 package es.fempa.estebanescobar.chatxd;
 
+import android.util.Log;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -28,51 +30,8 @@ public class SocketData {
         outputStream = null;
     }
 
-    //Create server
-    public void openSocket(int p){
-        this.port = p;
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try{
-                    serverSocket = new ServerSocket(port);
-                    ip = getPhoneIP();
-                    socket = serverSocket.accept();
-                    try {
-                        inputStream = new DataInputStream(socket.getInputStream());
-                        outputStream = new DataOutputStream(socket.getOutputStream());
-                    }catch(Exception e){ e.printStackTrace();}
-                    connected = true;
-                }catch(Exception e){
-                    connected = false;
-                    e.printStackTrace();
-                }
-            }
-        };
-    }
 
-    //Create client connection
-    public void openClient(int p, String address){
-        this.ip = address;
-        this.port = p;
-
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    socket = new Socket(ip, port);
-                    connected = true;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    connected = false;
-                }
-            }
-        };
-    }
-
-    private String getPhoneIP(){
+    public static String getPhoneIP(){
         String phoneIP = "";
         try
         {
@@ -151,4 +110,22 @@ public class SocketData {
     public void setPort(int port) {
         this.port = port;
     }
+
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
 }
