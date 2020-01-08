@@ -1,3 +1,8 @@
+/**
+This class handle all Threads needed in the app,
+each thread is created on a method by overriting Run() method on the Thread() object instance.
+ */
+
 package es.fempa.estebanescobar.chatxd;
 
 import android.util.Log;
@@ -21,6 +26,7 @@ public class Hilos {
             public void run() {
                 super.run();
                 try {
+                    //Log the client on the server
                     Log.e("lul", "entra con ip: "+SocketData.getInstance().getIp());
                     SocketData.getInstance().setSocket(new Socket(SocketData.getInstance().getIp(), SocketData.getInstance().getPort()));
                     SocketData.getInstance().setConnected(true);

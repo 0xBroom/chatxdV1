@@ -1,5 +1,9 @@
 /**
- * Author class.
+ * This class handle Author information
+ *
+ * @id The Author's id used to make the relation with message object.
+ * @name The Auhthor's name.
+ * @avatar Author's Profie image.
  */
 
 package es.fempa.estebanescobar.chatxd;

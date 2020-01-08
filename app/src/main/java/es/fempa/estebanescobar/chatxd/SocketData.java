@@ -1,3 +1,6 @@
+/**
+Singleton class used to handle socket connection
+ */
 package es.fempa.estebanescobar.chatxd;
 
 import android.util.Log;

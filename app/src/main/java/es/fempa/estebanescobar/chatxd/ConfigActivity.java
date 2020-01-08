@@ -1,3 +1,9 @@
+/**
+ * Main activity, used to handle the interaction with user and to ask for server's setting.
+ *
+ *
+ */
+
 package es.fempa.estebanescobar.chatxd;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +32,10 @@ public class ConfigActivity extends AppCompatActivity {
 
     public void connect(View v){
         if(s.isChecked()){
-            //Cliente
+            //Client.
             Hilos.openClient(Integer.parseInt(etPort.getText().toString()),etIP.getText().toString());
         }else{
-            //Servidor
+            //Server.
             Hilos.openServer(Integer.parseInt(etPort.getText().toString()));
         }
     }
