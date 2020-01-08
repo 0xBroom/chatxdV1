@@ -1,3 +1,11 @@
+/**
+This class handle message info
+
+@id Id needed to differentiate the message.
+@text Text sent.
+@IUser User's sender id.
+@date Message's date.
+ */
 package es.fempa.estebanescobar.chatxd;
 
 import com.stfalcon.chatkit.commons.models.IMessage;
