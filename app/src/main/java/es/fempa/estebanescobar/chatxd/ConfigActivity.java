@@ -10,9 +10,10 @@ import android.widget.TextView;
 
 public class ConfigActivity extends AppCompatActivity {
     Switch s;
-    private static TextView test;
+    private  TextView test;
     private EditText etIP;
     private EditText etPort;
+    private Hilos h;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,19 +23,26 @@ public class ConfigActivity extends AppCompatActivity {
         test = findViewById(R.id.test);
         etIP = findViewById(R.id.etIP);
         etPort = findViewById(R.id.etPort);
+        h = new Hilos(this);
     }
 
     public void connect(View v){
         if(s.isChecked()){
             //Cliente
-            Hilos.openClient(Integer.parseInt(etPort.getText().toString()),etIP.getText().toString());
+            h.openClient(Integer.parseInt(etPort.getText().toString()),etIP.getText().toString());
         }else{
             //Servidor
-            Hilos.openServer(Integer.parseInt(etPort.getText().toString()));
+            h.openServer(Integer.parseInt(etPort.getText().toString()));
         }
     }
 
-    public static void changeText(String ip){
-        test.setText("Conectado");
+    public void changeText(String text){
+        final String aux = text;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                test.setText(aux);
+            }
+        });
     }
 }
