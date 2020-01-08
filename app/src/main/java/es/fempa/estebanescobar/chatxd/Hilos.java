@@ -1,3 +1,8 @@
+/**
+ * This class handles all Threads that are used in the program.
+ * Each method override Run() method on a Thread() object instance.
+ *
+ */
 package es.fempa.estebanescobar.chatxd;
 
 import android.app.Activity;

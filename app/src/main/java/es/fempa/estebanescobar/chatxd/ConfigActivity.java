@@ -1,3 +1,6 @@
+/**
+ * Main Activity, handles user interaction and obtains data for server setting.
+ */
 package es.fempa.estebanescobar.chatxd;
 
 import androidx.appcompat.app.AppCompatActivity;
