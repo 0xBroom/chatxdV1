@@ -1,5 +1,5 @@
 /**
-Singleton class used to handle socket connection
+Singleton class that stores socket data, port and IP
  */
 package es.fempa.estebanescobar.chatxd;
 
