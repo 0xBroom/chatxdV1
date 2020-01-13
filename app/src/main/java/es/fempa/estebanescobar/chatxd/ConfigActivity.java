@@ -57,14 +57,11 @@ public class ConfigActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Handle action bar item clicks.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_info) {
-            //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(ConfigActivity.this, AboutActivity.class);
             startActivity(intent);
             return true;
@@ -109,14 +106,14 @@ public class ConfigActivity extends AppCompatActivity {
         if(type){
             //Cliente
             if(etIP.getText().toString().equals("") || etPort.getText().toString().equals("") || etName.getText().toString().equals("")){
-                info.setText(String.valueOf(R.string.emptyField));
+                info.setText(getResources().getString(R.string.emptyField));
                 salida = false;
             }
         }else{
             //Servidor
             if(etPort.getText().toString().equals("") || etName.getText().toString().equals("")){
 
-                info.setText(String.valueOf(R.string.emptyField));
+                info.setText(getResources().getString(R.string.emptyField));
                 salida = false;
             }
         }
