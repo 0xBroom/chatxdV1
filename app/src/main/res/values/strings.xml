@@ -8,4 +8,12 @@
     <string name="client">Cliente</string>
     <string name="cancel">Cancelar</string>
     <string name="info">Acerca de</string>
+    <string name="version">Versión 1.0</string>
+    <string name="createdby">Creado por Jon Andrés, Esteban Escobar</string>
+    <string name="connecting">Conectando...</string>
+    <string name="connected">Conectado</string>
+    <string name="waitingIn">Esperando en: </string>
+    <string name="unknownHostException">ERROR: no se encuentra la IP o el nombre de host</string>
+    <string name="bindException">ERROR: Dirección de socket en uso</string>
+    <string name="welcome">Buenas tardes</string>
 </resources>

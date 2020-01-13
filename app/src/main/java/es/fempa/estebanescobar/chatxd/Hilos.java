@@ -31,10 +31,10 @@ public class Hilos {
             public void run() {
                 super.run();
                 try {
+                    a.changeText(String.valueOf(R.string.connecting));
                     SocketData.getInstance().setSocket(new Socket(SocketData.getInstance().getIp(), SocketData.getInstance().getPort()));
                     SocketData.getInstance().setConnected(true);
-                    a.changeText("Connecting...");
-                    a.changeText("Connected");
+                    a.changeText(String.valueOf(R.string.connected));
                 } catch (IOException e) {
                     e.printStackTrace();
                     a.changeText(e.toString());
@@ -55,10 +55,10 @@ public class Hilos {
                 try{
                     SocketData.getInstance().setServerSocket(new ServerSocket(SocketData.getInstance().getPort())); //Creates server socket
                     SocketData.getInstance().setIp(SocketData.getPhoneIP()); //Grabs phone IP
-                    a.changeText("Waiting in: "+SocketData.getInstance().getIp());
+                    a.changeText(String.valueOf(R.string.waitingIn)+SocketData.getInstance().getIp());
                     a.revertButtons(false);
                     SocketData.getInstance().setSocket(SocketData.getInstance().getServerSocket().accept()); //Waits for client connection
-                    a.changeText("Connected");
+                    a.changeText(String.valueOf(R.string.connected));
                     try {
                         SocketData.getInstance().setInputStream(new DataInputStream(SocketData.getInstance().getSocket().getInputStream())); //Creates data input stream
                         SocketData.getInstance().setOutputStream(new DataOutputStream(SocketData.getInstance().getSocket().getOutputStream())); //Creates data output stream
@@ -66,11 +66,11 @@ public class Hilos {
                     SocketData.getInstance().setConnected(true);
 
                 }catch(UnknownHostException u){
-                    a.changeText("ERROR: IP or hostname not found");
+                    a.changeText(String.valueOf(R.string.unknownHostException));
                 }catch(BindException b){
-                    a.changeText("ERROR: Socket address in use");
+                    a.changeText(String.valueOf(R.string.bindException));
                 }catch(SocketException s){
-                    a.changeText("Esperando...");  //Aqui va el texto por defecto
+                    a.changeText(String.valueOf(R.string.welcome));  //Aqui va el texto por defecto
                 }catch(Exception e){
                     SocketData.getInstance().setConnected(false);
                     a.changeText(e.toString());

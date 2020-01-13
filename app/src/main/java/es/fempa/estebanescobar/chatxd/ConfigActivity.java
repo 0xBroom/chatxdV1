@@ -6,6 +6,7 @@ package es.fempa.estebanescobar.chatxd;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,23 +64,14 @@ public class ConfigActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_info) {
-            Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(ConfigActivity.this, AboutActivity.class);
+            startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        int groupId = 0;
-        int menuItemId = ID_MENU_SETTINGS;
-        int menuItemOrder = menu.NONE;
-        String menuItemText = "Settings";
-        MenuItem menuItem = menu.add(groupId, menuItemId, menuItemOrder, menuItemText);
-        return true;
-    }*/
 
     public void onClickConnect(View v){
         if(s.isChecked() && validateInputs(true)){
@@ -161,5 +153,10 @@ public class ConfigActivity extends AppCompatActivity {
                 info.setText(aux);
             }
         });
+    }
+
+    public void SwitchToChatActivity(){
+        Intent intent = new Intent(ConfigActivity.this, ChatActivity.class);
+        startActivity(intent);
     }
 }
