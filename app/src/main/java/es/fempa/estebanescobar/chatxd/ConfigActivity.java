@@ -4,6 +4,7 @@
 package es.fempa.estebanescobar.chatxd;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -25,7 +27,8 @@ public class ConfigActivity extends AppCompatActivity {
     private Hilos h;
     private Button btnConn;
     private Button btnCancel;
-    static final private int ID_MENU_SETTINGS = Menu.FIRST;
+    private Toolbar mTopToolbar;
+    //static final private int ID_MENU_SETTINGS = Menu.FIRST;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,35 @@ public class ConfigActivity extends AppCompatActivity {
         btnConn = findViewById(R.id.btnConn);
         btnCancel = findViewById(R.id.btnCancel);
         h = new Hilos(this);
+
+        mTopToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(mTopToolbar);
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_info) {
+            Toast.makeText(this, "Action clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         int groupId = 0;
@@ -50,7 +79,7 @@ public class ConfigActivity extends AppCompatActivity {
         String menuItemText = "Settings";
         MenuItem menuItem = menu.add(groupId, menuItemId, menuItemOrder, menuItemText);
         return true;
-    }
+    }*/
 
     public void onClickConnect(View v){
         if(s.isChecked() && validateInputs(true)){
