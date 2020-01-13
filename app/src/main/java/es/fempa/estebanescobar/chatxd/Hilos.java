@@ -35,10 +35,18 @@ public class Hilos {
                     SocketData.getInstance().setConnected(true);
                     a.changeText("Connecting...");
                     a.changeText("Connected");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    a.changeText(e.toString());
+                }catch(UnknownHostException u){
+                    a.changeText("ERROR: IP or hostname not found");
+                }catch(BindException b){
+                    a.changeText("ERROR: Socket address in use");
+                }catch(SocketException s){
+                    a.changeText("Esperando...");  //Aqui va el texto por defecto
+                }catch(Exception e){
                     SocketData.getInstance().setConnected(false);
+                    a.changeText(e.toString());
+                    e.printStackTrace();
+                }finally {
+                    a.revertButtons(true);
                 }
             }
         };

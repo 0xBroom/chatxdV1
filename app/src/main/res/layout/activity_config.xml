@@ -51,8 +51,7 @@
         android:ems="10"
         android:enabled="false"
         android:hint="@string/ip"
-        android:inputType="number"
-        android:digits="0123456789."
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/etPort"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
