@@ -31,6 +31,7 @@ public class SocketData {
         serverSocket = null;
         inputStream = null;
         outputStream = null;
+        socket = null;
     }
 
 

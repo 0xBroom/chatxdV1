@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 
 public class Hilos {
 
@@ -54,6 +56,7 @@ public class Hilos {
                     SocketData.getInstance().setServerSocket(new ServerSocket(SocketData.getInstance().getPort())); //Creates server socket
                     SocketData.getInstance().setIp(SocketData.getPhoneIP()); //Grabs phone IP
                     a.changeText("Waiting in: "+SocketData.getInstance().getIp());
+                    a.revertButtons(false);
                     SocketData.getInstance().setSocket(SocketData.getInstance().getServerSocket().accept()); //Waits for client connection
                     a.changeText("Connected");
                     try {
@@ -62,12 +65,18 @@ public class Hilos {
                     }catch(Exception e){ e.printStackTrace();}
                     SocketData.getInstance().setConnected(true);
 
-                }catch (BindException b){
-                    a.changeText("ERROR: Puerto ya en uso.");
+                }catch(UnknownHostException u){
+                    a.changeText("ERROR: IP or hostname not found");
+                }catch(BindException b){
+                    a.changeText("ERROR: Socket address in use");
+                }catch(SocketException s){
+                    a.changeText("Esperando...");  //Aqui va el texto por defecto
                 }catch(Exception e){
                     SocketData.getInstance().setConnected(false);
                     a.changeText(e.toString());
                     e.printStackTrace();
+                }finally {
+                    a.revertButtons(true);
                 }
             }
         };
