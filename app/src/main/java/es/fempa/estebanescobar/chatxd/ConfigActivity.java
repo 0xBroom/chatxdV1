@@ -109,14 +109,14 @@ public class ConfigActivity extends AppCompatActivity {
         if(type){
             //Cliente
             if(etIP.getText().toString().equals("") || etPort.getText().toString().equals("") || etName.getText().toString().equals("")){
-                info.setText("No se pueden dejar campos vacíos");
+                info.setText(String.valueOf(R.string.emptyField));
                 salida = false;
             }
         }else{
             //Servidor
             if(etPort.getText().toString().equals("") || etName.getText().toString().equals("")){
 
-                info.setText("No se pueden dejar campos vacíos");
+                info.setText(String.valueOf(R.string.emptyField));
                 salida = false;
             }
         }

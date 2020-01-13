@@ -16,4 +16,5 @@
     <string name="unknownHostException">ERROR: no se encuentra la IP o el nombre de host</string>
     <string name="bindException">ERROR: Dirección de socket en uso</string>
     <string name="welcome">Buenas tardes</string>
+    <string name="emptyField">No se pueden dejar campos vacios</string>
 </resources>
