@@ -6,6 +6,7 @@ package es.fempa.estebanescobar.chatxd;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -17,6 +18,7 @@ public class ConfigActivity extends AppCompatActivity {
     private EditText etIP;
     private EditText etPort;
     private Hilos h;
+    static final private int ID_MENU_SETTINGS = Menu.FIRST;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,18 @@ public class ConfigActivity extends AppCompatActivity {
         h = new Hilos(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        //identificador del grupo.
+        int groupId = 0;
+        //Identificador único del evento. Utilizado en
+        //El manejador de evento correspondiente.
+        int menuItemId = ID_MENU_SETTINGS;
+
+        return true;
+    }
+
     public void connect(View v){
         if(s.isChecked()){
             //Cliente
@@ -38,6 +52,7 @@ public class ConfigActivity extends AppCompatActivity {
             h.openServer(Integer.parseInt(etPort.getText().toString()));
         }
     }
+
 
     public void changeText(String text){
         final String aux = text;
