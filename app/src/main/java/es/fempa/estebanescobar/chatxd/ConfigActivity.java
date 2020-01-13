@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -34,12 +35,11 @@ public class ConfigActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        //identificador del grupo.
         int groupId = 0;
-        //Identificador único del evento. Utilizado en
-        //El manejador de evento correspondiente.
         int menuItemId = ID_MENU_SETTINGS;
-
+        int menuItemOrder = menu.NONE;
+        String menuItemText = "Settings";
+        MenuItem menuItem = menu.add(groupId, menuItemId, menuItemOrder, menuItemText);
         return true;
     }
 
