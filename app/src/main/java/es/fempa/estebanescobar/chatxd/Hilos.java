@@ -4,16 +4,11 @@
  *
  */
 package es.fempa.estebanescobar.chatxd;
-
-import android.app.Activity;
-import android.content.pm.ConfigurationInfo;
 import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -56,7 +51,6 @@ public class Hilos {
             public void run() {
                 super.run();//
                 try{
-                    Log.e("lul", "entra con ip: "+SocketData.getInstance().getIp());
                     SocketData.getInstance().setServerSocket(new ServerSocket(SocketData.getInstance().getPort())); //Creates server socket
                     SocketData.getInstance().setIp(SocketData.getPhoneIP()); //Grabs phone IP
                     a.changeText("Waiting in: "+SocketData.getInstance().getIp());
@@ -67,6 +61,9 @@ public class Hilos {
                         SocketData.getInstance().setOutputStream(new DataOutputStream(SocketData.getInstance().getSocket().getOutputStream())); //Creates data output stream
                     }catch(Exception e){ e.printStackTrace();}
                     SocketData.getInstance().setConnected(true);
+
+                }catch (BindException b){
+                    a.changeText("ERROR: Puerto ya en uso.");
                 }catch(Exception e){
                     SocketData.getInstance().setConnected(false);
                     a.changeText(e.toString());
