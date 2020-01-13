@@ -36,11 +36,11 @@ public class Hilos {
                     SocketData.getInstance().setConnected(true);
                     a.changeText(String.valueOf(R.string.connected));
                 }catch(UnknownHostException u){
-                    a.changeText("ERROR: IP or hostname not found");
+                    a.changeText(String.valueOf(R.string.unknownHostException));
                 }catch(BindException b){
-                    a.changeText("ERROR: Socket address in use");
+                    a.changeText(String.valueOf(R.string.bindException));
                 }catch(SocketException s){
-                    a.changeText("Esperando...");  //Aqui va el texto por defecto
+                    a.changeText(String.valueOf(R.string.welcome));  //Aqui va el texto por defecto
                 }catch(Exception e){
                     SocketData.getInstance().setConnected(false);
                     a.changeText(e.toString());
