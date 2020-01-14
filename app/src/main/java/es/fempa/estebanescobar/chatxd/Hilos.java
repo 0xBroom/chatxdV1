@@ -4,8 +4,6 @@
  *
  */
 package es.fempa.estebanescobar.chatxd;
-import android.content.res.Resources;
-import android.util.Log;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

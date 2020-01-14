@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -29,7 +28,6 @@ public class ConfigActivity extends AppCompatActivity {
     private Button btnConn;
     private Button btnCancel;
     private Toolbar mTopToolbar;
-    //static final private int ID_MENU_SETTINGS = Menu.FIRST;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
