@@ -15,23 +15,43 @@ public class ChatActivity extends AppCompatActivity {
     MessageInput inputView;
     MessagesListAdapter<Message> adapter;
     Author currentUser;
+    Author otherUser;
+    Hilos h;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-        adapter =  new MessagesListAdapter<>("1", null);
+        h = new Hilos(this);
+        h.messageListener();
+        adapter =  new MessagesListAdapter<>("1", null); //Sets the adapter
         inputView = findViewById(R.id.input);
         messagesList = findViewById(R.id.messagesList);
-        currentUser = new Author("1", "test");
+        currentUser = new Author("1", "Me");
+        otherUser = new Author("2", "You");
         messagesList.setAdapter(adapter);
+
+
         inputView.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {
                 adapter.addToStart(new Message(input.toString(), currentUser), true);
+                h.messageSender(input.toString());
                 return true;
             }
         });
     }
+
+    public void printMessage(String m){
+        final String message = m;
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                adapter.addToStart(new Message(message, otherUser), true);
+            }
+        });
+    }
+
+
 
 
 }
