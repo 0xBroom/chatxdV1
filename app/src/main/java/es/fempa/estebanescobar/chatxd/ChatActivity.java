@@ -49,8 +49,8 @@ public class ChatActivity extends AppCompatActivity {
 
         mTopToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mTopToolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Jon Andrés");
     }
 
     @Override
