@@ -18,4 +18,5 @@
     <string name="bindException">ERROR: Socket address in use</string>
     <string name="welcome">Good afternoon</string>
     <string name="emptyField">Fields cannot be empty</string>
+    <string name="noInternet">No network connection</string>
 </resources>

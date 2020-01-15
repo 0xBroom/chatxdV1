@@ -28,78 +28,90 @@ public class Hilos {
     }
     //Create client connection
     public  void openClient(int port, String ip){
-        SocketData.getInstance().setIp(ip);
-        SocketData.getInstance().setPort(port);
 
-        Thread t = new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                try {
-                    a.changeText(a.getResources().getString(R.string.connecting));
-                    SocketData.getInstance().setSocket(new Socket(SocketData.getInstance().getIp(), SocketData.getInstance().getPort())); //Creates socket
-                    SocketData.getInstance().setConnected(true);
-                    a.SwitchToChatActivity();
+        if(a.isNetworkConnected()){ //Network check
+
+            SocketData.getInstance().setIp(ip);
+            SocketData.getInstance().setPort(port);
+
+            Thread t = new Thread(){
+                @Override
+                public void run() {
+                    super.run();
                     try {
-                        SocketData.getInstance().setInputStream(new DataInputStream(SocketData.getInstance().getSocket().getInputStream())); //Creates data input stream
-                        SocketData.getInstance().setOutputStream(new DataOutputStream(SocketData.getInstance().getSocket().getOutputStream())); //Creates data output stream
-                    }catch(Exception e){ e.printStackTrace();}
-                    a.changeText(a.getResources().getString(R.string.connected));
-                }catch(UnknownHostException u){
-                    a.changeText(a.getResources().getString(R.string.unknownHostException));
-                }catch(BindException b){
-                    a.changeText(a.getResources().getString(R.string.bindException));
-                }catch(SocketException s){
-                    a.changeText(a.getResources().getString(R.string.welcome));
-                }catch(Exception e){
-                    SocketData.getInstance().setConnected(false);
-                    a.changeText(e.toString());
-                    e.printStackTrace();
-                }finally {
-                    a.revertButtons(true);
+
+                        a.changeText(a.getResources().getString(R.string.connecting));
+                        SocketData.getInstance().setSocket(new Socket(SocketData.getInstance().getIp(), SocketData.getInstance().getPort())); //Creates socket
+                        SocketData.getInstance().setConnected(true);
+                        a.SwitchToChatActivity();
+                        try {
+                            SocketData.getInstance().setInputStream(new DataInputStream(SocketData.getInstance().getSocket().getInputStream())); //Creates data input stream
+                            SocketData.getInstance().setOutputStream(new DataOutputStream(SocketData.getInstance().getSocket().getOutputStream())); //Creates data output stream
+                        }catch(Exception e){ e.printStackTrace();}
+                        a.changeText(a.getResources().getString(R.string.connected));
+                    }catch(UnknownHostException u){
+                        a.changeText(a.getResources().getString(R.string.unknownHostException));
+                    }catch(BindException b){
+                        a.changeText(a.getResources().getString(R.string.bindException));
+                    }catch(SocketException s){
+                        a.changeText(a.getResources().getString(R.string.welcome));
+                    }catch(Exception e){
+                        SocketData.getInstance().setConnected(false);
+                        a.changeText(e.toString());
+                        e.printStackTrace();
+                    }finally {
+                        a.revertButtons(true);
+                    }
                 }
-            }
-        };
-        t.start();
+            };
+            t.start();
+        }else{
+            a.changeText(a.getResources().getString(R.string.noInternet));
+        }
     }
 
     //Open server socket
     public  void openServer(int port){
-        SocketData.getInstance().setPort(port);
-        Thread t = new Thread(){
-            @Override
-            public void run() {
-                super.run();//
-                try{
-                    SocketData.getInstance().setServerSocket(new ServerSocket(SocketData.getInstance().getPort())); //Creates server socket
-                    SocketData.getInstance().setIp(SocketData.getPhoneIP()); //Grabs phone IP
-                    a.changeText(a.getResources().getString(R.string.waitingIn)+SocketData.getInstance().getIp());
-                    a.revertButtons(false);
-                    SocketData.getInstance().setSocket(SocketData.getInstance().getServerSocket().accept()); //Waits for client connection
-                    a.changeText(a.getResources().getString(R.string.connected));
-                    a.SwitchToChatActivity();
-                    try {
-                        SocketData.getInstance().setInputStream(new DataInputStream(SocketData.getInstance().getSocket().getInputStream())); //Creates data input stream
-                        SocketData.getInstance().setOutputStream(new DataOutputStream(SocketData.getInstance().getSocket().getOutputStream())); //Creates data output stream
-                    }catch(Exception e){ e.printStackTrace();}
-                    SocketData.getInstance().setConnected(true);
 
-                }catch(UnknownHostException u){
-                    a.changeText(a.getResources().getString(R.string.unknownHostException));
-                }catch(BindException b){
-                    a.changeText(a.getResources().getString(R.string.bindException));
-                }catch(SocketException s){
-                    a.changeText(a.getResources().getString(R.string.welcome));  //Aqui va el texto por defecto
-                }catch(Exception e){
-                    SocketData.getInstance().setConnected(false);
-                    a.changeText(e.toString());
-                    e.printStackTrace();
-                }finally {
-                    a.revertButtons(true);
+        if(a.isNetworkConnected()) {//Network check
+            SocketData.getInstance().setPort(port);
+            Thread t = new Thread(){
+                @Override
+                public void run() {
+                    super.run();//
+                    try{
+                        SocketData.getInstance().setServerSocket(new ServerSocket(SocketData.getInstance().getPort())); //Creates server socket
+                        SocketData.getInstance().setIp(SocketData.getPhoneIP()); //Grabs phone IP
+                        a.changeText(a.getResources().getString(R.string.waitingIn)+SocketData.getInstance().getIp());
+                        a.revertButtons(false);
+                        SocketData.getInstance().setSocket(SocketData.getInstance().getServerSocket().accept()); //Waits for client connection
+                        a.changeText(a.getResources().getString(R.string.connected));
+                        a.SwitchToChatActivity();
+                        try {
+                            SocketData.getInstance().setInputStream(new DataInputStream(SocketData.getInstance().getSocket().getInputStream())); //Creates data input stream
+                            SocketData.getInstance().setOutputStream(new DataOutputStream(SocketData.getInstance().getSocket().getOutputStream())); //Creates data output stream
+                        }catch(Exception e){ e.printStackTrace();}
+                        SocketData.getInstance().setConnected(true);
+
+                    }catch(UnknownHostException u){
+                        a.changeText(a.getResources().getString(R.string.unknownHostException));
+                    }catch(BindException b){
+                        a.changeText(a.getResources().getString(R.string.bindException));
+                    }catch(SocketException s){
+                        a.changeText(a.getResources().getString(R.string.welcome));  //Aqui va el texto por defecto
+                    }catch(Exception e){
+                        SocketData.getInstance().setConnected(false);
+                        a.changeText(e.toString());
+                        e.printStackTrace();
+                    }finally {
+                        a.revertButtons(true);
+                    }
                 }
-            }
-        };
-        t.start();
+            };
+            t.start();
+        }else {
+            a.changeText(a.getResources().getString(R.string.noInternet));
+        }
     }
 
     //Message listener

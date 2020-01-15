@@ -17,4 +17,5 @@
     <string name="bindException">ERROR: Dirección de socket en uso</string>
     <string name="welcome">Buenas tardes</string>
     <string name="emptyField">No se pueden dejar campos vacios</string>
+    <string name="noInternet">No hay conexión a red</string>
 </resources>

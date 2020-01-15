@@ -6,7 +6,9 @@ package es.fempa.estebanescobar.chatxd;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -153,5 +155,12 @@ public class ConfigActivity extends AppCompatActivity {
     public void SwitchToChatActivity(){
         Intent intent = new Intent(ConfigActivity.this, ChatActivity.class);
         startActivity(intent);
+    }
+
+    //Checks if device is connected to a network
+    public boolean isNetworkConnected(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }
