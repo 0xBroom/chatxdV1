@@ -49,6 +49,8 @@ public class ChatActivity extends AppCompatActivity {
 
         mTopToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(mTopToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -61,14 +63,29 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks.
-        int id = item.getItemId();
+        Intent intent;
+        switch (item.getItemId())
+        {
+            case R.id.action_info:
+                intent = new Intent(ChatActivity.this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            case android.R.id.home:
+                //SALIDA DE LA ACTIVIDAD.
+                finishActivity(1);
+                return true;
+
+        }
+        //int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_info) {
-            Intent intent = new Intent(ChatActivity.this, AboutActivity.class);
-            startActivity(intent);
-            return true;
-        }
+        /*if (id == R.id.action_info) {
+
+        }*/
+
+        /*if(id = android.){
+
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
