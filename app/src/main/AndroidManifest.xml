@@ -13,8 +13,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <activity android:name=".AboutActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".ConfigActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ChatActivity" android:screenOrientation="portrait">
+        <activity android:name=".ChatActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ConfigActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,10 +4,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ChatActivity">
 
-    <item
-        android:id="@+id/action_pic"
-        android:icon="@drawable/userpic"
-        android:title="@string/info"
-        app:showAsAction="ifRoom"/>
 
 </menu>

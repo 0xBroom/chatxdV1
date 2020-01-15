@@ -51,12 +51,13 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(mTopToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Jon Andrés");
+        getSupportActionBar().setIcon(R.drawable.userpic);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        //getMenuInflater().inflate(R.menu.menu_chat, menu);
         return true;
     }
 
