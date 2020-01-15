@@ -44,7 +44,7 @@ public class ConfigActivity extends AppCompatActivity {
         btnCancel = findViewById(R.id.btnCancel);
         h = new Hilos(this);
 
-        mTopToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        mTopToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(mTopToolbar);
     }
 
@@ -70,6 +70,7 @@ public class ConfigActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Connect button event
     public void onClickConnect(View v){
         if(s.isChecked() && validateInputs(true)){
             //Cliente
@@ -81,6 +82,7 @@ public class ConfigActivity extends AppCompatActivity {
         }
     }
 
+    //Cancel button event
     public void onClickCancel(View v){
         try {
             SocketData.getInstance().getServerSocket().close();
@@ -90,6 +92,7 @@ public class ConfigActivity extends AppCompatActivity {
         revertButtons(true);
     }
 
+    //Switch event
     public void onClickSwitch(View v){
         if(s.isChecked()){
             //Cliente
@@ -100,6 +103,7 @@ public class ConfigActivity extends AppCompatActivity {
         }
     }
 
+    //Checks if any input is empty
     public boolean validateInputs(boolean type){
         boolean salida = true;
 
@@ -121,6 +125,7 @@ public class ConfigActivity extends AppCompatActivity {
         return salida;
     }
 
+    //Enables/Disables ui buttons
     public void revertButtons(boolean revert){
         if (revert){
             runOnUiThread(new Runnable() {
@@ -142,6 +147,7 @@ public class ConfigActivity extends AppCompatActivity {
 
     }
 
+    //Changes bottom text
     public void changeText(String text){
         final String aux = text;
         runOnUiThread(new Runnable() {
@@ -152,6 +158,7 @@ public class ConfigActivity extends AppCompatActivity {
         });
     }
 
+    //Switches to chat activity
     public void SwitchToChatActivity(){
         Intent intent = new Intent(ConfigActivity.this, ChatActivity.class);
         startActivity(intent);
