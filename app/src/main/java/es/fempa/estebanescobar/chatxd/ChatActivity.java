@@ -63,32 +63,30 @@ public class ChatActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks.
+        // Handle action bar item's clicks.
         Intent intent;
+        boolean returnar = false;
         switch (item.getItemId())
         {
             case R.id.action_info:
                 intent = new Intent(ChatActivity.this, AboutActivity.class);
                 startActivity(intent);
-                return true;
+                returnar = true;
+                break;
             case android.R.id.home:
                 //SALIDA DE LA ACTIVIDAD.
                 finishActivity(1);
-                return true;
-
+                returnar = true;
+                break;
         }
-        //int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_info) {
-
-        }*/
-
-        /*if(id = android.){
-
-        }*/
-
-        return super.onOptionsItemSelected(item);
+        if (returnar){
+            return true;
+        }
+        else
+        {
+            return super.onOptionsItemSelected(item);
+        }
     }
 
     public void printMessage(String m){
