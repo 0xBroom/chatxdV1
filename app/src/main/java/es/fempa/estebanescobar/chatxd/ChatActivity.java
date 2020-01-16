@@ -33,24 +33,23 @@ public class ChatActivity extends AppCompatActivity {
         adapter =  new MessagesListAdapter<>("1", null); //Sets the adapter
         inputView = findViewById(R.id.input);
         messagesList = findViewById(R.id.messagesList);
-        currentUser = new Author("1", "Me");
-        otherUser = new Author("2", "You");
+        h.messageSender("_-_-_-_-_;"+CurrentUsers.getInstance().getMe().getName());
         messagesList.setAdapter(adapter);
 
 
         inputView.setInputListener(new MessageInput.InputListener() {
             @Override
             public boolean onSubmit(CharSequence input) {
-                adapter.addToStart(new Message(input.toString(), currentUser), true);
+                adapter.addToStart(new Message(input.toString(), CurrentUsers.getInstance().getMe()), true);
                 h.messageSender(input.toString());
                 return true;
             }
         });
 
-        mTopToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        mTopToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(mTopToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Jon Andrés");
+
         getSupportActionBar().setIcon(R.drawable.userpic);
     }
 
@@ -75,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
                 break;
             case android.R.id.home:
                 //SALIDA DE LA ACTIVIDAD.
-                finishActivity(1);
+                finish();
                 returnar = true;
                 break;
         }
@@ -94,7 +93,7 @@ public class ChatActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                adapter.addToStart(new Message(message, otherUser), true);
+                adapter.addToStart(new Message(message, CurrentUsers.getInstance().getOther()), true);
             }
         });
     }

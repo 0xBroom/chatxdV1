@@ -3,6 +3,7 @@
  */
 package es.fempa.estebanescobar.chatxd;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,6 +20,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.net.Socket;
 
 public class ConfigActivity extends AppCompatActivity {
     Switch s;
@@ -48,7 +50,7 @@ public class ConfigActivity extends AppCompatActivity {
         setSupportActionBar(mTopToolbar);
     }
 
-    @Override
+   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -70,26 +72,30 @@ public class ConfigActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     //Connect button event
     public void onClickConnect(View v){
         if(s.isChecked() && validateInputs(true)){
             //Cliente
             btnConn.setEnabled(false);
+            CurrentUsers.getInstance().getMe().setName(etName.getText().toString());
             h.openClient(Integer.parseInt(etPort.getText().toString()),etIP.getText().toString());
         }else if (validateInputs(false)){
             //Servidor
+            CurrentUsers.getInstance().getMe().setName(etName.getText().toString());
             h.openServer(Integer.parseInt(etPort.getText().toString()));
         }
     }
 
     //Cancel button event
     public void onClickCancel(View v){
-        try {
-            SocketData.getInstance().getServerSocket().close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!SocketData.getInstance().isConnected()){
+            h.disconnect();
         }
-        revertButtons(true);
     }
 
     //Switch event
@@ -161,7 +167,8 @@ public class ConfigActivity extends AppCompatActivity {
     //Switches to chat activity
     public void SwitchToChatActivity(){
         Intent intent = new Intent(ConfigActivity.this, ChatActivity.class);
-        startActivity(intent);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, 1);
     }
 
     //Checks if device is connected to a network
@@ -169,5 +176,12 @@ public class ConfigActivity extends AppCompatActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        h.messageSender("!-_-_-_-_;");
+        h.disconnect();
     }
 }

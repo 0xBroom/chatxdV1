@@ -11,9 +11,15 @@ package es.fempa.estebanescobar.chatxd;
 import com.stfalcon.chatkit.commons.models.IUser;
 
 public class Author implements IUser {
-    String id;
-    String name;
-    String avatar;
+   private String id;
+   private String name;
+   private String avatar;
+
+    public Author(String id){
+        this.id = id;
+        name = "";
+        avatar = "";
+    }
 
     public Author()
     {
@@ -48,5 +54,9 @@ public class Author implements IUser {
     @Override
     public String getAvatar() {
         return avatar;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

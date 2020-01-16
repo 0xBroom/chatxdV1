@@ -4,6 +4,9 @@
  *
  */
 package es.fempa.estebanescobar.chatxd;
+import android.app.Activity;
+import android.util.Log;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -128,7 +131,28 @@ public class Hilos {
                     String line = "";
                     line = getMessage();
                     if(line!="" && line.length()!=0) {
-                        c.printMessage(line);
+                        if (line.length() >= 10){
+                            switch(line.substring(0,10)){
+                                case "_-_-_-_-_;":
+                                    CurrentUsers.getInstance().getOther().setName(line.substring(line.lastIndexOf(';') + 1));
+                                    c.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            c.getSupportActionBar().setTitle(CurrentUsers.getInstance().getOther().getName());
+                                        }
+                                    });
+                                    break;
+                                case "!-_-_-_-_;":
+                                    c.setResult(Activity.RESULT_CANCELED);
+                                    c.finish();
+                                    break;
+                                default:
+                                    c.printMessage(line);
+                                    break;
+                            }
+                        }else{
+                            c.printMessage(line);
+                        }
                     }
                 }
             }
@@ -163,6 +187,27 @@ public class Hilos {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        };
+        t.start();
+    }
+
+    public void disconnect(){
+        Thread t = new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    if( SocketData.getInstance().getServerSocket() != null){
+                        SocketData.getInstance().getServerSocket().close();
+                    }
+                    SocketData.getInstance().setConnected(false);
+                    a.changeText(a.getResources().getString(R.string.welcome));
+                    reading = false;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                a.revertButtons(true);
             }
         };
         t.start();
