@@ -1,3 +1,7 @@
+/**
+ * Handle user's data and allow other classes to access on it.
+ */
+
 package es.fempa.estebanescobar.chatxd;
 
 public class CurrentUsers {
@@ -17,6 +21,7 @@ public class CurrentUsers {
         if (instance == null){
             instance = new CurrentUsers();
         }
+
         return instance;
     }
 

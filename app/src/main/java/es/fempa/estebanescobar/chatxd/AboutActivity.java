@@ -1,3 +1,7 @@
+/**
+ * About activity.
+ */
+
 package es.fempa.estebanescobar.chatxd;
 
 import androidx.appcompat.app.AppCompatActivity;

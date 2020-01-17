@@ -3,7 +3,6 @@
  */
 package es.fempa.estebanescobar.chatxd;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,8 +18,6 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.net.Socket;
 
 public class ConfigActivity extends AppCompatActivity {
     Switch s;
@@ -52,77 +49,90 @@ public class ConfigActivity extends AppCompatActivity {
 
    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+       /**
+        * Inflate the menu; this adds items to the action bar if it is present.
+        */
+       getMenuInflater().inflate(R.menu.menu_main, menu);
+       return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks.
-        int id = item.getItemId();
+        /**
+         * Handle action bar item's clicks.
+         */
+        Intent intent;
+        boolean ButtonClicked = false;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_info) {
-            Intent intent = new Intent(ConfigActivity.this, AboutActivity.class);
-            startActivity(intent);
-            return true;
+        switch (item.getItemId())
+        {
+            case R.id.action_info: //Info button clicked.
+                intent = new Intent(ConfigActivity.this, AboutActivity.class);
+                startActivity(intent);
+                ButtonClicked = true;
+                break;
+            default:
+                    break;
         }
 
-        return super.onOptionsItemSelected(item);
+        return ButtonClicked || super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
 
-    //Connect button event
     public void onClickConnect(View v){
+        /**
+         * Connect button event.
+         * Handler to open communications socket.
+         */
         if(s.isChecked() && validateInputs(true)){
-            //Cliente
+            //Client
             btnConn.setEnabled(false);
             CurrentUsers.getInstance().getMe().setName(etName.getText().toString());
             h.openClient(Integer.parseInt(etPort.getText().toString()),etIP.getText().toString());
         }else if (validateInputs(false)){
-            //Servidor
+            //Server
             CurrentUsers.getInstance().getMe().setName(etName.getText().toString());
             h.openServer(Integer.parseInt(etPort.getText().toString()));
         }
     }
 
-    //Cancel button event
     public void onClickCancel(View v){
+        /**
+         * Cancel button event.
+         */
         if (!SocketData.getInstance().isConnected()){
             h.disconnect();
         }
     }
 
-    //Switch event
     public void onClickSwitch(View v){
+        /**
+         * Switch event
+         */
         if(s.isChecked()){
-            //Cliente
+            //Client
             etIP.setEnabled(true);
         }else{
-            //Servidor
+            //Server
            etIP.setEnabled(false);
         }
     }
 
-    //Checks if any input is empty
     public boolean validateInputs(boolean type){
+        /**
+         * Checks if any input is empty
+         */
         boolean salida = true;
 
-        if(type){
-            //Cliente
+        if(type ){
+            //Client
             if(etIP.getText().toString().equals("") || etPort.getText().toString().equals("") || etName.getText().toString().equals("")){
                 info.setText(getResources().getString(R.string.emptyField));
                 salida = false;
             }
         }else{
-            //Servidor
+            //Server
             if(etPort.getText().toString().equals("") || etName.getText().toString().equals("")){
-
                 info.setText(getResources().getString(R.string.emptyField));
                 salida = false;
             }
@@ -131,8 +141,10 @@ public class ConfigActivity extends AppCompatActivity {
         return salida;
     }
 
-    //Enables/Disables ui buttons
     public void revertButtons(boolean revert){
+        /**
+         * Enables/Disables ui buttons
+         */
         if (revert){
             runOnUiThread(new Runnable() {
                 @Override
@@ -153,8 +165,10 @@ public class ConfigActivity extends AppCompatActivity {
 
     }
 
-    //Changes bottom text
     public void changeText(String text){
+        /**
+         * Changes bottom text
+         */
         final String aux = text;
         runOnUiThread(new Runnable() {
             @Override
@@ -164,15 +178,19 @@ public class ConfigActivity extends AppCompatActivity {
         });
     }
 
-    //Switches to chat activity
     public void SwitchToChatActivity(){
+        /**
+         * Switches to chat activity
+         */
         Intent intent = new Intent(ConfigActivity.this, ChatActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivityForResult(intent, 1);
     }
 
-    //Checks if device is connected to a network
     public boolean isNetworkConnected(){
+        /**
+         * Checks if device is connected to a network
+         */
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
@@ -180,8 +198,11 @@ public class ConfigActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /**
+         * When an user disconnects a message is sent to communicate it to the receptor.
+         */
         super.onActivityResult(requestCode, resultCode, data);
-        h.messageSender("!-_-_-_-_;");
+        h.messageSender("!-_-_-_-_;"); //Special Message.
         h.disconnect();
     }
 }

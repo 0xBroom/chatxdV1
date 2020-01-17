@@ -36,6 +36,10 @@ public class SocketData {
 
 
     public static String getPhoneIP(){
+        /**
+         * Gets the phone's IP to show it to the other user.
+         */
+
         String phoneIP = "";
         try
         {
@@ -63,8 +67,10 @@ public class SocketData {
         return phoneIP;
     }
 
-    //Get Instance
     public static SocketData getInstance(){
+        /**
+         * Get Instance
+         */
         if (instance == null){
             instance = new SocketData();
         }

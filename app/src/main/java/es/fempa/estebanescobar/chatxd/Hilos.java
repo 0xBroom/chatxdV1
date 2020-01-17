@@ -29,9 +29,11 @@ public class Hilos {
     public Hilos (ChatActivity c){
         this.c  = c;
     }
-    //Create client connection
-    public  void openClient(int port, String ip){
 
+    public  void openClient(int port, String ip){
+        /**
+         * Create client connection
+         */
         if(a.isNetworkConnected()){ //Network check
 
             SocketData.getInstance().setIp(ip);
@@ -73,9 +75,10 @@ public class Hilos {
         }
     }
 
-    //Open server socket
     public  void openServer(int port){
-
+        /**
+         * Open server socket
+         */
         if(a.isNetworkConnected()) {//Network check
             SocketData.getInstance().setPort(port);
             Thread t = new Thread(){
@@ -117,8 +120,10 @@ public class Hilos {
         }
     }
 
-    //Message listener
     public void messageListener(){
+        /**
+         * Message listener
+         */
         reading = true;
 
         Thread t = new Thread(){
@@ -138,7 +143,7 @@ public class Hilos {
                                     c.runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            c.getSupportActionBar().setTitle(CurrentUsers.getInstance().getOther().getName());
+                                            c.getSupportActionBar().setTitle(CurrentUsers.getInstance().getOther().getName()); //Set the current chatacativity's tittle
                                         }
                                     });
                                     break;
@@ -161,9 +166,11 @@ public class Hilos {
 
     }
 
-    //Gets message from inputstream
     private String getMessage()
     {
+        /**
+         * Gets message from inputstream
+         */
         String message="";
 
         try {
@@ -177,6 +184,9 @@ public class Hilos {
     }
 
     public void messageSender(String m){
+        /**
+         * Send the message through the socket
+         */
         final String message = m;
         Thread t = new Thread(){
             @Override
@@ -193,6 +203,9 @@ public class Hilos {
     }
 
     public void disconnect(){
+        /**
+         * Disconnect the socket and rec-config the config activity.
+         */
         Thread t = new Thread(){
             @Override
             public void run() {
